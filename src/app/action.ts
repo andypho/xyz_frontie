@@ -9,3 +9,9 @@ export async function getThreads() {
   const result = await response.json();
   return result.data as Thread[];
 }
+
+export async function getThread(urlSlug: string) {
+  const response = await fetch(`${API_ENDPOINT}/threads/${urlSlug}`);
+  const result = await response.json();
+  return result.data as Thread;
+}
