@@ -28,6 +28,7 @@ You will also need to create a `.env.production` file in the root of your projec
 The `.env.production` file should contain the same environment variables as the `.env.development` file, but with the values specific to your production environment.
 
 ## Running
+
 Before running the development server, make sure to install all required packages with:
 
 ```bash
