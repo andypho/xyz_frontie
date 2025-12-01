@@ -19,7 +19,7 @@ export async function getThread(urlSlug: string) {
     cache: "no-cache",
   });
   const result = await response.json();
-  return result.data as Thread;
+  return result.data as Thread | undefined;
 }
 
 export async function createThread(
