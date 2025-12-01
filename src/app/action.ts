@@ -7,13 +7,17 @@ import { type Thread } from "~/lib/types";
 const API_ENDPOINT = process.env.API_ENDPOINT;
 
 export async function getThreads() {
-  const response = await fetch(`${API_ENDPOINT}/threads`);
+  const response = await fetch(`${API_ENDPOINT}/threads`, {
+    cache: "no-cache",
+  });
   const result = await response.json();
   return result.data as Thread[];
 }
 
 export async function getThread(urlSlug: string) {
-  const response = await fetch(`${API_ENDPOINT}/threads/${urlSlug}`);
+  const response = await fetch(`${API_ENDPOINT}/threads/${urlSlug}`, {
+    cache: "no-cache",
+  });
   const result = await response.json();
   return result.data as Thread;
 }
@@ -30,6 +34,7 @@ export async function createThread(
     body: JSON.stringify({
       title: formData.get("title"),
     }),
+    cache: "no-cache",
   });
 
   const result = await response.json();
@@ -57,6 +62,7 @@ export async function updateThread(
       body: JSON.stringify({
         content: formData.get("content"),
       }),
+      cache: "no-cache",
     },
   );
 
