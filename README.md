@@ -23,9 +23,8 @@ API_ENDPOINT=http://localhost:4000/api # Replace with your API endpoint
 
 #### Production Mode
 
-You will also need to create a `.env.production` file in the root of your project to add environment variables specific to your production environment.
-
-The `.env.production` file should contain the same environment variables as the `.env.development` file, but with the values specific to your production environment.
+You will need to configure the environment variables depending on the service you use to deploy your application.
+For example, if you are using Vercel, you can configure the environment variables in the "Environment Variables" section of the Vercel project settings.
 
 ## Running
 
