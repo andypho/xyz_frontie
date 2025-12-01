@@ -1,19 +1,27 @@
 "use client";
 
+import { useActionState } from "react";
+import { updateThread } from "~/app/action";
 import TimeAgo from "~/components/TimeAgo";
 import type { Thread } from "~/lib/types";
+
+import AddPostForm from "./AddPostForm";
 
 type Props = {
   thread: Thread;
 };
 
 const ThreadView = (props: Props) => {
-  const { thread } = props;
+  const [{ thread }, formAction] = useActionState(updateThread, {
+    thread: props.thread,
+  });
 
   return (
     <div>
       <h1 className="text-lg font-semibold leading-8">{thread.title}</h1>
       <span>{thread.count} posts</span>
+
+      <AddPostForm action={formAction} />
 
       <ul className="list bg-base-100 rounded-box shadow-md">
         {(thread.posts ?? []).map((post) => (

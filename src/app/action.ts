@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { type Thread } from "~/lib/types";
 
@@ -40,4 +41,33 @@ export async function createThread(
       error: result.message,
     };
   }
+}
+
+export async function updateThread(
+  initialState: { thread: Thread },
+  formData: FormData,
+) {
+  const response = await fetch(
+    `${API_ENDPOINT}/threads/${initialState.thread.url_slug}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: formData.get("content"),
+      }),
+    },
+  );
+
+  const result = await response.json();
+
+  // Revalidate the home pagefor the soft navigation on the client side
+  revalidatePath("/");
+
+  if (response.ok) {
+    return { thread: result.data as Thread };
+  }
+
+  return initialState;
 }
